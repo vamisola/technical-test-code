@@ -7,5 +7,3 @@ module.exports = {
     cookieKey: process.env.COOKIE_KEY
 };
 
-
-mongodb://technical-tester:GuDLJQiQmgz8HtqEUHH}@ds259111.mlab.com:59111/technical-test-prod
