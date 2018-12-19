@@ -8,15 +8,33 @@ module.exports = (app) => {
         })
     );
 
-    app.get('/auth/google/callback', passport.authenticate('google'));
+    app.get('/auth/google/callback', passport.authenticate('google', {
+        successRedirect: '/companies',
+        failureRedirect: '/',
+        failureFlash: true,
+        successFlash: 'You are logged in'
+    }), (req, res, next) =>{    
+    });
+
 
     app.get('/api/logout', (req, res) => {
         req.logout();
-        res.send(req.user);
+        req.flash("success", "You're logged out!");
+        //res.send(req.user);
+        res.redirect('/');
     });
 
     app.get('/api/current_user', (req, res) => {
         res.send(req.user);
     });
 
+
+    app.post('/', passport.authenticate("local", {
+        successRedirect: '/companies',
+        failureRedirect: '/',
+        failureFlash: true,
+        successFlash: 'Welcome!'
+    }), (req, res, next) => {
+        req.flash("error", "User not found!");
+    });
 };

@@ -1,0 +1,37 @@
+<% include partials/header %>
+<div class="main-container">
+<section class="jumbotron">
+    <header><h3 class="text-center display-4">Company List</h3></header>
+</section>
+
+    <section id="companyList">
+        <div class="container">
+            <!-- <h2>Status</h2>
+            <form action="/" method="POST">
+            <div class="form-check-inline">
+                <label class="form-check-label">
+                    <input type="radio" class="form-check-input" name="optradio" value="active">Active
+                </label>
+            </div>
+            <div class="form-check-inline">
+                <label class="form-check-label">
+                    <input type="radio" class="form-check-input" name="optradio" value="inactive">Inactive
+                </label>
+            </div>
+            </form> --> 
+            
+            <% for (let i=0, l=companies.company.length; i < l; i++) { %>
+                <div class="card">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><%= companies.company[i].name %> - <%= companies.company[i].status %></li>
+                    </ul>
+                </div>
+                
+        
+            <% } %>
+        </div>
+    </section>
+</div>
+
+<% include partials/footer %>
+

@@ -1,0 +1,31 @@
+<% include partials/header %>
+<div class="main-container">
+<section class="jumbotron">
+    <header><h3 class="display-4 text-center">Login Page</h3></header>
+</section>
+<section>
+    <div class="container">
+        <div class="row justify-content-center">
+            <!-- <form action="/" method="GET"> -->
+            <form>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Email address</label>
+                    <input type="email" class="form-control" name="username" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Password</label>
+                    <input type="password" class="form-control" id="exampleInputPassword1" name="password" placeholder="Password">
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+        <div class="row justify-content-center">
+            <p><h5 class="align-self-center">or Login with</h5></p>
+            <div><a href="/auth/google"><img src="../public/assets/images/google2.0.0.jpg" id="imgGoogle"></a></div>
+        </div>
+    </div>
+</section>
+</div>
+
+<% include partials/footer %>

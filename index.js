@@ -1,14 +1,31 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cookieSession = require("cookie-session");
+const flash = require("connect-flash");
+const methodOverride = require('method-override');
 const passport = require("passport");
 const keys = require('./config/keys');
 require("./models/Company");
 require("./services/passport");
 
-mongoose.connect(keys.mongoURI, {useNewUrlParser: true});
+const bodyParser = require("body-parser");
+const path = require("path");
+const PORT = process.env.PORT || 5000;
 
 const app =  express();
+
+
+// View Setup
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, '/views'));
+app.use(methodOverride('_method'));
+app.use(flash());
+
+//body parser
+app.use(bodyParser.urlencoded({extended: true}))
+.use(bodyParser.json());
+
+
 
 app.use(
     cookieSession({
@@ -17,12 +34,34 @@ app.use(
     })
 );
 
+//Set static folder
+app.use(express.static(path.join(__dirname)));
+
+
 app.use(passport.initialize());
 app.use(passport.session());
 
+require("./routes/indexRoutes")(app);
 require("./routes/authRoutes")(app);
 
-const PORT = process.env.PORT || 5000;
+
+//mongoose
+mongoose.connect(keys.mongoURI, {useNewUrlParser: true});
+
+app.use(function (req, res, next) {
+    res.locals.currentUser = req.user;
+    res.locals.error = req.flash("error");
+    res.locals.success = req.flash("success");
+    next();
+});
+
+//Express messages
+app.use(require('connect-flash')());
+app.use((req, res, next) => {
+    res.locals.messages = require('express-messages')(req, res);
+    next();
+});
+
 
 app.listen(PORT, () => {
     console.log(`Listening to port ${PORT}`);
