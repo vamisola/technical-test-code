@@ -1,0 +1,24 @@
+{
+    "company": [{
+            "name": "ABC",
+            "status": "inactive"
+        },
+        {
+            "name": "Telstra",
+            "status": "active"
+        },
+        {
+            "name": "Coles",
+            "status": "active"
+        },
+        {
+            "name": "Woolworths",
+            "status": "inactive"
+        },
+        {
+            "name": "Woolworths",
+            "status": "active"
+        }
+    ],
+    "user": "JSON"
+}
