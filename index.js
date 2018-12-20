@@ -7,6 +7,7 @@ const passport = require("passport");
 const keys = require('./config/keys');
 require("./models/Company");
 require("./services/passport");
+const User = mongoose.model('users');
 
 const bodyParser = require("body-parser");
 const path = require("path");
@@ -60,6 +61,25 @@ app.use(require('connect-flash')());
 app.use((req, res, next) => {
     res.locals.messages = require('express-messages')(req, res);
     next();
+});
+
+app.get('/register', (req, res) => {
+    res.render("register");
+});
+
+//handling user sign up
+app.post("/register", (req, res) => {
+    req.body.username
+    req.body.password
+    User.register(new User({username: req.body.username}), req.body.password, (err, user) => {
+        if(err){
+            console.log(err);
+            return res.render('register')
+        }
+        passport.authenticate("local")(req, res, () => {
+            res.redirect("/");
+        })
+    });
 });
 
 

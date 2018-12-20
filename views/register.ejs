@@ -1,0 +1,33 @@
+<% include partials/header %>
+<div class="main-container">
+    <section class="jumbotron">
+        <header>
+            <h3 class="display-4 text-center">Register Page</h3>
+        </header>
+    </section>
+    <section>
+        <div class="container">
+            <div class="row justify-content-center">
+                <form action="/register" method="POST">
+                    <!-- <form> -->
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Email address as username</label>
+                        <input type="email" class="form-control" name="username" id="exampleInputEmail1"
+                            aria-describedby="emailHelp" placeholder="type username@test.com">
+                        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone
+                            else.</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Password</label>
+                        <input type="password" class="form-control" id="exampleInputPassword1" name="password"
+                            placeholder="type password">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+            
+        </div>
+    </section>
+</div>
+
+<% include partials/footer %>

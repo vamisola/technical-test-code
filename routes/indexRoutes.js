@@ -32,8 +32,4 @@ module.exports = (app) => {
         });
     });
 
-    app.post('/companies', (req,res) => {
-        let optradio =  req.body.optradio;
-        console.log(optradio);
-    });
 }
