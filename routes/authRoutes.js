@@ -14,6 +14,7 @@ module.exports = (app) => {
         failureFlash: true,
         successFlash: 'You are logged in'
     }), (req, res, next) =>{    
+        res.redirect("/");
     });
 
 

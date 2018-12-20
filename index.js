@@ -18,7 +18,7 @@ const app =  express();
 
 // View Setup
 app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, '/views'));
+app.set('views', path.join(__dirname, 'views'));
 app.use(methodOverride('_method'));
 app.use(flash());
 
@@ -79,6 +79,40 @@ app.post("/register", (req, res) => {
         passport.authenticate("local")(req, res, () => {
             res.redirect("/");
         })
+    });
+});
+
+// Handle 404
+app.use(function (req, res) {
+    res.render('notFound');
+});
+
+// Handle 500
+app.use(function (error, req, res, next) {
+    res.send('500: Internal Server Error', 500);
+});
+
+// error handlers
+
+// development error handler
+// will print stacktrace
+if (app.get('env') === 'development') {
+    app.use(function (err, req, res, next) {
+        res.status(err.status || 500);
+        res.render('error', {
+            message: err.message,
+            error: err
+        });
+    });
+}
+
+// production error handler
+// no stacktraces leaked to user
+app.use(function (err, req, res, next) {
+    res.status(err.status || 500);
+    res.render('error', {
+        message: err.message,
+        error: {}
     });
 });
 

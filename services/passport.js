@@ -4,7 +4,6 @@ const mongoose = require("mongoose");
 const keys = require("../config/keys");
 const LocalStrategy = require("passport-local");
 const User = mongoose.model('users');
-// const User = require('./models/Company');
 
 passport.serializeUser((user, done) => {
     done(null, user.id);
@@ -43,5 +42,5 @@ passport.use(
 passport.use(new LocalStrategy(User.authenticate()));
 
 
-passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser());
+// passport.serializeUser(User.serializeUser());
+// passport.deserializeUser(User.deserializeUser());
