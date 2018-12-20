@@ -3,6 +3,7 @@ const dataFile = "./data/company.json";
 const _ = require("underscore");
 const middleware = require('../middleware/index');
 
+
 module.exports = (app) => {
     let companies = {};
     let filterActive = {};
@@ -24,7 +25,7 @@ module.exports = (app) => {
     });
 
     app.get('/', (req, res) => {
-        res.render("login");
+        res.render("login", {user:  req.user });
     });
 
     app.get('/companies', middleware.isLoggedIn, (req, res) => {
@@ -32,5 +33,4 @@ module.exports = (app) => {
             companies: companies, filterActive: filterActive, filterInactive:filterInactive
         });
     });
-
 }

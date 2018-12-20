@@ -27,7 +27,6 @@ app.use(bodyParser.urlencoded({extended: true}))
 .use(bodyParser.json());
 
 
-
 app.use(
     cookieSession({
         maxAge: 30 * 24 * 60 * 60 * 1000,
@@ -69,27 +68,29 @@ app.get('/register', (req, res) => {
 
 //handling user sign up
 app.post("/register", (req, res) => {
-    req.body.username
-    req.body.password
-    User.register(new User({username: req.body.username}), req.body.password, (err, user) => {
-        if(err){
+    req.body.username;
+    req.body.password;
+    let newUser = new User({
+        username: req.body.username,
+        password: req.body.password
+    });
+    User.register(newUser, req.body.password, (err, user) => {
+        if (err) {
             console.log(err);
-            return res.render('register')
+            req.flash("error", "A user with the given username is already registered");
+            return res.render('register', {
+                error: err.message
+            });
         }
         passport.authenticate("local")(req, res, () => {
-            res.redirect("/");
+            req.flash("success", "Successfully signed up! Welcome to the Dashboard, " + req.body.username);
+            res.redirect("/companies");
         })
     });
 });
-
 // Handle 404
 app.use(function (req, res) {
     res.render('notFound');
-});
-
-// Handle 500
-app.use(function (error, req, res, next) {
-    res.send('500: Internal Server Error', 500);
 });
 
 // error handlers

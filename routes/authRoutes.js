@@ -34,7 +34,7 @@ module.exports = (app) => {
         successRedirect: '/companies',
         failureRedirect: '/',
         failureFlash: true,
-        successFlash: 'Welcome!'
+        successFlash: 'Welcome to the Dashboad!'
     }), (req, res, next) => {
         req.flash("error", "User not found!");
     });

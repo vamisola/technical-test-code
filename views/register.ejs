@@ -4,12 +4,23 @@
         <header>
             <h3 class="display-4 text-center">Register Page</h3>
         </header>
+        <div class="row justify-content-center">
+			<% if(error && error.length > 0) { %>
+				<div class="alert alert-danger" role="alert">
+					<%=error %>
+				</div><br />
+			<% }%>
+			<% if(success && success.length > 0) { %>
+				<div class="alert alert-success" role="alert">
+					<%=success %>
+				</div><br />
+			<% }%>
+		</div>
     </section>
     <section>
         <div class="container">
             <div class="row justify-content-center">
                 <form action="/register" method="POST">
-                    <!-- <form> -->
                     <div class="form-group">
                         <label for="exampleInputEmail1">Email address as username</label>
                         <input type="email" class="form-control" name="username" id="exampleInputEmail1"
