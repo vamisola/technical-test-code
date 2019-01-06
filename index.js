@@ -41,9 +41,6 @@ app.use(express.static(path.join(__dirname)));
 app.use(passport.initialize());
 app.use(passport.session());
 
-require("./routes/indexRoutes")(app);
-require("./routes/authRoutes")(app);
-
 
 //mongoose
 mongoose.connect(keys.mongoURI, {useNewUrlParser: true});
@@ -55,6 +52,9 @@ app.use(function (req, res, next) {
     next();
 });
 
+// require("./routes/indexRoutes")(app);
+require("./routes/authRoutes")(app);
+
 //Express messages
 app.use(require('connect-flash')());
 app.use((req, res, next) => {
@@ -62,32 +62,33 @@ app.use((req, res, next) => {
     next();
 });
 
-app.get('/register', (req, res) => {
-    res.render("register");
-});
+// app.get('/register', (req, res) => {
+//     res.render("register");
+// });
 
-//handling user sign up
-app.post("/register", (req, res) => {
-    req.body.username;
-    req.body.password;
-    let newUser = new User({
-        username: req.body.username,
-        password: req.body.password
-    });
-    User.register(newUser, req.body.password, (err, user) => {
-        if (err) {
-            console.log(err);
-            req.flash("error", "A user with the given username is already registered");
-            return res.render('register', {
-                error: err.message
-            });
-        }
-        passport.authenticate("local")(req, res, () => {
-            req.flash("success", "Successfully signed up! Welcome to the Dashboard, " + req.body.username);
-            res.redirect("/companies");
-        })
-    });
-});
+// //handling user sign up
+// app.post("/register", (req, res) => {
+//     req.body.username;
+//     req.body.password;
+//     let newUser = new User({
+//         username: req.body.username,
+//         password: req.body.password
+//     });
+//     User.register(newUser, req.body.password, (err, user) => {
+//         if (err) {
+//             console.log(err);
+//             req.flash("error", "A user with the given username is already registered");
+//             return res.render('register', {
+//                 error: err.message
+//             });
+//         }
+//         passport.authenticate("local")(req, res, () => {
+//             req.flash("success", "Successfully signed up! Welcome to the Dashboard, " + req.body.username);
+//             res.redirect("/companies");
+//         })
+//     });
+// });
+
 // Handle 404
 app.use(function (req, res) {
     res.render('notFound');
@@ -111,9 +112,11 @@ if (app.get('env') === 'development') {
 // no stacktraces leaked to user
 app.use(function (err, req, res, next) {
     res.status(err.status || 500);
-    res.render('error', {
+    res.render('errorMessage', {
         message: err.message,
-        error: {}
+        error: {}, 
+        success: {}
+        
     });
 });
 

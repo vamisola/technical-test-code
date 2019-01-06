@@ -1,0 +1,23 @@
+<% include partials/header %>
+<div class="main-container">
+    <section class="jumbotron">
+        <header>
+            <div class="row justify-content-center">
+                <% if(error && error.length > 0) { %>
+                <div class="alert alert-danger" role="alert">
+                    <%=error %>
+                </div><br />
+                <% }%>
+                <% if(success && success.length > 0) { %>
+                <div class="alert alert-success" role="alert">
+                    <%=success %>
+                </div><br />
+                <% }%>
+            </div>
+            <p class="text-center"><a href="/">Go Back to Login Page</a></p>
+        </header>
+    </section>
+
+</div>
+
+<% include partials/footer %>

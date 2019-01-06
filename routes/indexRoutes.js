@@ -25,12 +25,14 @@ module.exports = (app) => {
     });
 
     app.get('/', (req, res) => {
-        res.render("login", {user:  req.user });
+        res.render("login");
     });
 
     app.get('/companies', middleware.isLoggedIn, (req, res) => {
-        res.render("landing", {
-            companies: companies, filterActive: filterActive, filterInactive:filterInactive
+        res.render("landing", 
+        {
+            user: req.user,
+            companies: companies, filterActive: filterActive, filterInactive: filterInactive
         });
     });
 }
